@@ -1,0 +1,103 @@
+FOUNDATIONS OF ARTIFICIAL
+INTELLIGENCE
+NAME: BRIAN KIPLANG'AT ROTICH
+REG NO: CIT-227-078/2024
+UNIT: FOUNDATIONS OF AI 
+Question One: Search Strategies and Formal Logic
+a) Comprehensive Analysis: Informed vs. Uninformed Search
+In the field of Artificial Intelligence, Search is defined as the algorithmic process of exploring a
+state space to determine a sequence of actions that transitions an agent from an initial
+configuration to a desired goal state. 
+Uninformed Search (Blind Search): These algorithms explore the state space without any
+prior knowledge regarding the relative "goodness" of states or the estimated distance to the
+goal. Examples include Breadth-First Search (BFS) and Depth-First Search (DFS). 
+Informed Search (Heuristic Search): This methodology incorporates domain-specific
+knowledge through a heuristic function, $h(n)$, which estimates the cost from the current node
+to the goal. By focusing on paths that appear most promising, informed search significantly
+reduces computational complexity. 
+Differentiating Factors:
+Heuristic Integration: Informed search utilizes mathematical estimates to guide
+exploration, whereas uninformed search proceeds systematically without such guidance.
+Search Space Efficiency: By leveraging heuristics, informed search prunes irrelevant
+branches, making it far more efficient than the exhaustive approach of blind search.
+Resource Utilization: Informed search typically requires less memory and processing
+time compared to uninformed search, which may explore a vast number of unnecessary
+nodes.
+• 
+• 
+• b) Implementation: A* Search Algorithm
+import heapq
+from typing import Dict, List, Tuple, Any, Optional
+def a_star_search(graph: Dict[Any, Dict[Any, float]], heuristics:
+Dict[Any, float], start: Any, goal: Any):
+# priority_queue: (f_score, current_node, path)
+ priority_queue = [(heuristics[start], start, [start])]
+ visited = set()
+ g_scores = {start: 0}
+while priority_queue:
+ f_score, current_node, path = heapq.heappop(priority_queue)
+if current_node == goal:
+return path, g_scores[goal]
+if current_node in visited:
+continue
+ visited.add(current_node)
+for neighbor, cost in graph.get(current_node, {}).items():
+ new_g_score = g_scores[current_node] + cost
+if neighbor not in g_scores or new_g_score lt
+g_scores[neighbor]:
+ g_scores[neighbor] = new_g_score
+ total_f_score = new_g_score + heuristics.get(neighbor, 
+0)
+ heapq.heappush(priority_queue, (total_f_score,
+neighbor, path + [neighbor]))
+# Laboratory Test Scenario
+graph = {'A': {'B': 1, 'C': 3}, 'B': {'D': 5}, 'C': {'D': 1}}
+h = {'A': 4, 'B': 2, 'C': 1, 'D': 0}
+path, cost = a_star_search(graph, h, 'A', 'D')
+print(f"Path: {path} Cost: {cost}") c) Logical Evaluation: Truth Table Analysis
+P Q R P ∧ Q ¬R (P ∧ Q) → ¬R
+T T T T F F
+T T F T T T
+T F T F F T
+T F F F T T
+F T T F F T
+F T F F T T
+F F T F F T
+F F F F T T
+Classification: The statement is Satisfiable and Falsifiable. It is not valid as it evaluates to
+false in the first row.
+Question Two: Agent Frameworks and Implementation
+a) Intelligent Agent Design: Forensic DNA Analysis
+For identifying victims of the Shakahola tragedy, we design an agent focused on genomic
+sequencing. Below is the PEAS and PAGE categorization.
+PEAS Elements:
+Performance Measure: Precision and recall of genetic matches, speed of report
+generation, and reduction of misidentification errors.
+Environment: Laboratory data clusters, Ministry of Health databases, forensic sample
+archives, and hospital registries.
+• 
+• Actuators: Generation of victim identification reports, digital status displays, and
+automated database updates for legal authorities.
+Sensors: High-throughput DNA sequencers, biometric scanners, and data interfaces for
+family reference samples.
+PAGE Elements:
+Percepts: Raw genomic sequence data, family lineage DNA strings, forensic metadata
+from site recovery, and missing person records.
+Actions: Comparing DNA markers, flagging high-confidence matches, identifying
+lineage anomalies, and notifying investigative teams.
+Goals: To achieve accurate and rapid identification of all remains, establish biological
+lineage between victims and relatives, and facilitate forensic closure.
+Environment: The computational and physical setting, including genomic sequence
+repositories, laboratory infrastructures, and secure cloud databases.
+b) Python Implementation: Reflex Vacuum Agent
+class VacuumAgent:
+def __init__(self):
+self.state = {'A': 'Dirty', 'B': 'Dirty'}
+self.location = 'A'
+def sense_and_act(self):
+while 'Dirty' in self.state.values():
+ current_status = self.state[self.location]
+if current_status == 'Dirty':
+self.state[self.location] = 'Clean'
+self.location = 'B' if self.location == 'A' else 'A'
+print("System Report: Cleaning operations complete.")
